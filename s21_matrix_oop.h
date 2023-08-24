@@ -30,8 +30,18 @@ public:
     double Determinant();
     S21Matrix InverseMatrix();
 
+    S21Matrix operator+(const S21Matrix& other)const;
+    S21Matrix operator-(const S21Matrix& other)const;
+    S21Matrix operator*(const S21Matrix& other)const;
+    S21Matrix operator*(double num) const;
+    bool operator==(const S21Matrix& other)const;
+    S21Matrix operator+=(const S21Matrix& other);
+    S21Matrix operator-=(const S21Matrix& other);
+    S21Matrix operator*=(const S21Matrix& other);
+    S21Matrix operator*=(double num);
     S21Matrix& operator=(const S21Matrix& other);
     S21Matrix& operator=(S21Matrix&& other) noexcept ;
+    double& operator()(int i, int j) const;
 private:
     void AllocMatrix();
 //    void FreeMatrix();
