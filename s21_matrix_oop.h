@@ -20,21 +20,21 @@ public:
     void SetRows(int rows);
     void SetCols(int cols);
 
-    bool EqMatrix(const S21Matrix& other);
-    void SumMatrix(const S21Matrix& other);
-    void SubMatrix(const S21Matrix& other);
-    void MulNumber(const double num);
-    void MulMatrix(const S21Matrix& other);
-    S21Matrix Transpose();
+    [[nodiscard]] bool EqMatrix(const S21Matrix& other) const { return *this == other;}
+    void SumMatrix(const S21Matrix& other) {*this += other;}
+    void SubMatrix(const S21Matrix& other) {*this -= other;}
+    void MulNumber(double num) {*this *= num;}
+    void MulMatrix(const S21Matrix& other) {*this *= other;}
+    [[nodiscard]] S21Matrix Transpose() const;
     S21Matrix CalcComplements();
     double Determinant();
     S21Matrix InverseMatrix();
 
+    bool operator==(const S21Matrix& other)const;
     S21Matrix operator+(const S21Matrix& other)const;
     S21Matrix operator-(const S21Matrix& other)const;
     S21Matrix operator*(const S21Matrix& other)const;
     S21Matrix operator*(double num) const;
-    bool operator==(const S21Matrix& other)const;
     S21Matrix operator+=(const S21Matrix& other);
     S21Matrix operator-=(const S21Matrix& other);
     S21Matrix operator*=(const S21Matrix& other);

@@ -1,5 +1,22 @@
 #include "../s21_matrix_oop.h"
 
+bool S21Matrix::operator==(const S21Matrix& other) const {
+    if (&other == this) {
+        return true;
+    }
+    if (rows_ != other.rows_ || cols_ != other.cols_) {
+        return false;
+    }
+
+    for (int i = 0; i < rows_ * cols_; ++i) {
+        if (matrix_[i] != other.matrix_[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
     if (rows_ != other.rows_ || cols_ != other.cols_) {
         throw std::invalid_argument("Invalid parameters");
@@ -44,23 +61,6 @@ S21Matrix S21Matrix::operator*(const double num) const {
         res.matrix_[i] = matrix_[i]*num;
     }
     return res;
-}
-
-bool S21Matrix::operator==(const S21Matrix& other) const {
-    if (&other == this) {
-        return true;
-    }
-    if (rows_ != other.rows_ || cols_ != other.cols_) {
-        return false;
-    }
-
-    for (int i = 0; i < rows_ * cols_; ++i) {
-        if (matrix_[i] != other.matrix_[i]) {
-            return false;
-        }
-    }
-
-    return true;
 }
 
 S21Matrix S21Matrix::operator+=(const S21Matrix& other) {
