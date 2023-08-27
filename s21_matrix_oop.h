@@ -2,6 +2,8 @@
 #define CPP_MATRIX_S21_MATRIX_OOP_H
 
 #include <stdexcept>
+#include <cmath>
+#include <cfloat>
 
 class S21Matrix {
 private:
@@ -44,6 +46,7 @@ public:
     double& operator()(int i, int j) const;
 private:
     void AllocMatrix();
+    void cut_matrix(const S21Matrix& matrix, S21Matrix& new_matrix, int row, int col);
 //    void FreeMatrix();
 };
 
