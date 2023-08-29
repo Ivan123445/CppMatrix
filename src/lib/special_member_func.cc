@@ -1,6 +1,6 @@
 #include <algorithm>
 
-#include "../s21_matrix_oop.h"
+#include "../../s21_matrix_oop.h"
 
 S21Matrix::S21Matrix()
     :rows_(0), cols_(0), matrix_(nullptr) {}

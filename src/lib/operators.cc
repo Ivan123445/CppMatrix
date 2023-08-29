@@ -1,4 +1,4 @@
-#include "../s21_matrix_oop.h"
+#include "../../s21_matrix_oop.h"
 
 bool S21Matrix::operator==(const S21Matrix& other) const {
     if (&other == this) {
@@ -9,7 +9,7 @@ bool S21Matrix::operator==(const S21Matrix& other) const {
     }
 
     for (int i = 0; i < rows_ * cols_; ++i) {
-        if (matrix_[i] != other.matrix_[i]) {
+        if (fabs(matrix_[i] - other.matrix_[i]) > ACCURACY) {
             return false;
         }
     }
@@ -34,7 +34,7 @@ S21Matrix S21Matrix::operator-(const S21Matrix& other) const {
     }
     S21Matrix res(rows_, cols_);
     for (int i = 0; i < rows_ * cols_; ++i) {
-        res.matrix_[i] = matrix_[i] + other.matrix_[i];
+        res.matrix_[i] = matrix_[i] - other.matrix_[i];
     }
     return res;
 }
@@ -47,7 +47,7 @@ S21Matrix S21Matrix::operator*(const S21Matrix& other) const {
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < other.cols_; ++j) {
             for (int k = 0; k < cols_; ++k) {
-                res.matrix_[i*cols_ + j] = matrix_[i*cols_ + k] * other.matrix_[k*other.cols_ + j];
+                res(i, j) = (*this)(i, k) * other(k, j);
             }
         }
     }

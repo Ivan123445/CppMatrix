@@ -1,4 +1,4 @@
-#include "../s21_matrix_oop.h"
+#include "../../s21_matrix_oop.h"
 
 void S21Matrix::AllocMatrix() {
     if (rows_ < 0 || cols_ < 0) {
@@ -32,5 +32,22 @@ void S21Matrix::SetCols(int cols) {
             }
         }
         *this = std::move(res);
+    }
+}
+
+void S21Matrix::cut_matrix(const S21Matrix& origin_matrix, S21Matrix& new_matrix, int row, int col) {
+    int miss_row = 0;
+    for (int i = 0; i < origin_matrix.rows_ - 1; ++i) {
+        if (i == row) {
+            miss_row = 1;
+        }
+        int miss_col = 0;
+        for (int j = 0; j < origin_matrix.rows_ - 1; ++j) {
+            if (j == col) {
+                miss_col = 1;
+            }
+            new_matrix(i, j) =
+                    origin_matrix(i + miss_row, j + miss_col);
+        }
     }
 }

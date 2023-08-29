@@ -5,6 +5,8 @@
 #include <cmath>
 #include <cfloat>
 
+#define ACCURACY 1e-6
+
 class S21Matrix {
 private:
     int rows_, cols_;
@@ -18,7 +20,7 @@ public:
     ~S21Matrix();
 
     [[nodiscard]] int GetRows() const {return rows_;}
-    [[nodiscard]] int GerCols() const {return cols_;}
+    [[nodiscard]] int GetCols() const {return cols_;}
     void SetRows(int rows);
     void SetCols(int cols);
 
@@ -28,14 +30,14 @@ public:
     void MulNumber(double num) {*this *= num;}
     void MulMatrix(const S21Matrix& other) {*this *= other;}
     [[nodiscard]] S21Matrix Transpose() const;
-    S21Matrix CalcComplements();
-    double Determinant();
-    S21Matrix InverseMatrix();
+    [[nodiscard]] S21Matrix CalcComplements() const;
+    [[nodiscard]] double Determinant() const;
+    [[nodiscard]] S21Matrix InverseMatrix() const;
 
-    bool operator==(const S21Matrix& other)const;
-    S21Matrix operator+(const S21Matrix& other)const;
-    S21Matrix operator-(const S21Matrix& other)const;
-    S21Matrix operator*(const S21Matrix& other)const;
+    bool operator==(const S21Matrix& other) const;
+    S21Matrix operator+(const S21Matrix& other) const;
+    S21Matrix operator-(const S21Matrix& other) const;
+    S21Matrix operator*(const S21Matrix& other) const;
     S21Matrix operator*(double num) const;
     S21Matrix operator+=(const S21Matrix& other);
     S21Matrix operator-=(const S21Matrix& other);
@@ -46,8 +48,7 @@ public:
     double& operator()(int i, int j) const;
 private:
     void AllocMatrix();
-    void cut_matrix(const S21Matrix& matrix, S21Matrix& new_matrix, int row, int col);
-//    void FreeMatrix();
+    static void cut_matrix(const S21Matrix& matrix, S21Matrix& new_matrix, int row, int col);
 };
 
 #endif //CPP_MATRIX_S21_MATRIX_OOP_H

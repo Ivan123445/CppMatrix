@@ -1,17 +1,17 @@
-#include "../s21_matrix_oop.h"
+#include "../../s21_matrix_oop.h"
 
 S21Matrix S21Matrix::Transpose() const {
     S21Matrix res (cols_, rows_);
 
     for (int i = 0; i < cols_; ++i) {
         for (int j = 0; j < rows_; ++j) {
-            res.matrix_[i*cols_ + j] = matrix_[j*cols_ + i];
+            res(i, j) = (*this)(j, i);
         }
     }
     return res;
 }
 
-S21Matrix S21Matrix::CalcComplements() {
+S21Matrix S21Matrix::CalcComplements() const {
     if (rows_ != cols_) {
         throw std::invalid_argument("Invalid parameters");
     }
@@ -29,24 +29,7 @@ S21Matrix S21Matrix::CalcComplements() {
     return res;
 }
 
-void S21Matrix::cut_matrix(const S21Matrix& origin_matrix, S21Matrix& new_matrix, int row, int col) {
-    int miss_row = 0;
-    for (int i = 0; i < origin_matrix.rows_ - 1; ++i) {
-        if (i == row) {
-            miss_row = 1;
-        }
-        size_t miss_col = 0;
-        for (int j = 0; j < origin_matrix.rows_ - 1; ++j) {
-            if (j == col) {
-                miss_col = 1;
-            }
-            new_matrix(i, j) =
-                    origin_matrix(i + miss_row, j + miss_col);
-        }
-    }
-}
-
-double S21Matrix::Determinant() {
+double S21Matrix::Determinant() const{
     if (rows_ != cols_) {
         throw std::invalid_argument("Invalid parameters");
     }
@@ -70,7 +53,7 @@ double S21Matrix::Determinant() {
     return temp_det;
 }
 
-S21Matrix S21Matrix::InverseMatrix() {
+S21Matrix S21Matrix::InverseMatrix() const{
     if (rows_ != cols_) {
         throw std::invalid_argument("Invalid parameters");
     }
