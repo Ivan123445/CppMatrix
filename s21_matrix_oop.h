@@ -9,8 +9,8 @@
 
 class S21Matrix {
  private:
-  int rows_, cols_;
-  double* matrix_;
+  int rows_ = 0, cols_ = 0;
+  double* matrix_ = nullptr;
 
  public:
   S21Matrix();

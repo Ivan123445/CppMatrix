@@ -19,7 +19,7 @@ bool S21Matrix::operator==(const S21Matrix& other) const {
 
 S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
-    throw std::invalid_argument("Plus: Invalid parameters");
+    throw std::invalid_argument("Plus: Invalid arguments");
   }
   S21Matrix res(rows_, cols_);
   for (int i = 0; i < rows_ * cols_; ++i) {
@@ -30,7 +30,7 @@ S21Matrix S21Matrix::operator+(const S21Matrix& other) const {
 
 S21Matrix S21Matrix::operator-(const S21Matrix& other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
-    throw std::invalid_argument("Minus: Invalid parameters");
+    throw std::invalid_argument("Minus: Invalid arguments");
   }
   S21Matrix res(rows_, cols_);
   for (int i = 0; i < rows_ * cols_; ++i) {
@@ -41,7 +41,7 @@ S21Matrix S21Matrix::operator-(const S21Matrix& other) const {
 
 S21Matrix S21Matrix::operator*(const S21Matrix& other) const {
   if (cols_ != other.rows_) {
-    throw std::invalid_argument("Mul: Invalid parameters");
+    throw std::invalid_argument("Mul: Invalid arguments");
   }
   S21Matrix res(rows_, other.cols_);
   for (int i = 0; i < rows_; ++i) {

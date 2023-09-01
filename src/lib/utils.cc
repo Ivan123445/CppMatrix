@@ -2,7 +2,7 @@
 
 void S21Matrix::AllocMatrix() {
   if (rows_ < 0 || cols_ < 0) {
-    throw std::invalid_argument("Alloc: Invalid parameters");
+    throw std::out_of_range("Alloc: Parameters out of range");
   }
   try {
     matrix_ = new double[rows_ * cols_];
@@ -12,6 +12,9 @@ void S21Matrix::AllocMatrix() {
 }
 
 void S21Matrix::SetRows(int rows) {
+  if (rows < 0) {
+    throw std::out_of_range("SetRows: Parameters out of range");
+  }
   if (rows != rows_) {
     S21Matrix res(rows, cols_);
     for (int i = 0; i < cols_; ++i) {
@@ -24,6 +27,9 @@ void S21Matrix::SetRows(int rows) {
 }
 
 void S21Matrix::SetCols(int cols) {
+  if (cols < 0) {
+    throw std::out_of_range("SetCols: Parameters out of range");
+  }
   if (cols != cols_) {
     S21Matrix res(rows_, cols);
     for (int i = 0; i < std::min(cols, cols_); ++i) {

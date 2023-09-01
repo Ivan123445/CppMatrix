@@ -12,6 +12,9 @@ S21Matrix S21Matrix::Transpose() const {
 }
 
 S21Matrix S21Matrix::CalcComplements() const {
+  if (rows_ != cols_) {
+    throw std::invalid_argument("CalcComplements: Matrix must be square");
+  }
   S21Matrix res(rows_, cols_);
 
   for (int i = 0; i < res.rows_; ++i) {
@@ -27,6 +30,9 @@ S21Matrix S21Matrix::CalcComplements() const {
 }
 
 double S21Matrix::Determinant() const {
+  if (rows_ != cols_) {
+    throw std::invalid_argument("Determinant: Matrix must be square");
+  }
   double temp_det = 0;
   if (rows_ == 1) {
     temp_det = (*this)(0, 0);
