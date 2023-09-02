@@ -9,7 +9,7 @@ bool S21Matrix::operator==(const S21Matrix& other) const {
   }
 
   for (int i = 0; i < rows_ * cols_; ++i) {
-    if (fabs(matrix_[i] - other.matrix_[i]) > ACCURACY) {
+    if (std::fabs(matrix_[i] - other.matrix_[i]) > accuracy) {
       return false;
     }
   }
@@ -97,6 +97,9 @@ S21Matrix& S21Matrix::operator=(const S21Matrix& other) {
 }
 
 S21Matrix& S21Matrix::operator=(S21Matrix&& other) noexcept {
+  if (&other == this) {
+    return *this;
+  }
   delete[] matrix_;
   cols_ = other.cols_;
   rows_ = other.rows_;

@@ -5,13 +5,9 @@
 #include <cmath>
 #include <stdexcept>
 
-#define ACCURACY 1e-6
+auto constexpr accuracy = 1e-6;
 
 class S21Matrix {
- private:
-  int rows_ = 0, cols_ = 0;
-  double* matrix_ = nullptr;
-
  public:
   S21Matrix();
   S21Matrix(int rows, int cols);
@@ -24,14 +20,12 @@ class S21Matrix {
   void SetRows(int rows);
   void SetCols(int cols);
 
-  [[nodiscard]] bool EqMatrix(const S21Matrix& other) const {
-    return *this == other;
-  }
-  void SumMatrix(const S21Matrix& other) { *this += other; }
-  void SubMatrix(const S21Matrix& other) { *this -= other; }
-  void MulNumber(double num) { *this *= num; }
-  void MulMatrix(const S21Matrix& other) { *this *= other; }
-  [[nodiscard]] S21Matrix Transpose() const;
+  [[nodiscard]] bool EqMatrix(const S21Matrix& other) const;
+  void SumMatrix(const S21Matrix& other);
+  void SubMatrix(const S21Matrix& other);
+  void MulNumber(double num);
+  void MulMatrix(const S21Matrix& other);
+  [[nodiscard]] S21Matrix Transpose() const noexcept;
   [[nodiscard]] S21Matrix CalcComplements() const;
   [[nodiscard]] double Determinant() const;
   [[nodiscard]] S21Matrix InverseMatrix() const;
@@ -50,6 +44,9 @@ class S21Matrix {
   double& operator()(int i, int j) const;
 
  private:
+  int rows_ = 0, cols_ = 0;
+  double* matrix_ = nullptr;
+
   void AllocMatrix();
   [[nodiscard]] S21Matrix cut_matrix(int row, int col) const;
 };

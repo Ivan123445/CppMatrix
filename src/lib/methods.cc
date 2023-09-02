@@ -1,6 +1,17 @@
 #include "../../s21_matrix_oop.h"
 
-S21Matrix S21Matrix::Transpose() const {
+bool S21Matrix::EqMatrix(const S21Matrix& other) const {
+  return *this == other;
+}
+void S21Matrix::SumMatrix(const S21Matrix& other) { *this += other; }
+
+void S21Matrix::SubMatrix(const S21Matrix& other) { *this -= other; }
+
+void S21Matrix::MulNumber(double num) { *this *= num; }
+
+void S21Matrix::MulMatrix(const S21Matrix& other) { *this *= other; }
+
+S21Matrix S21Matrix::Transpose() const noexcept {
   S21Matrix res(cols_, rows_);
 
   for (int i = 0; i < cols_; ++i) {
